@@ -1,0 +1,250 @@
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<div class="container mt-4">
+
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div class="d-flex justify-content-end gap-3 mb-4">
+            <a href="/Expenses/Create" class="btn btn-primary px-4">
+                ➕ Add Expense
+            </a>
+
+            <a href="/Expenses/Index" class="btn btn-dark text-white px-4">
+                📄 View All Expenses
+            </a>
+
+            <a href="/Income/Index" class="btn btn-success px-4">
+                💰 View Income
+            </a>
+        </div>
+
+        <h3 class="fw-bold text-primary">Expense Dashboard</h3>
+
+        @if (Context.Session.GetString("Name") != null)
+        {
+            <h2 class="mb-3">Welcome, @Context.Session.GetString("Name") 👋</h2>
+        }
+    </div>
+
+    <!-- EXPENSE Summary Section -->
+    <div class="row g-3">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Today's Spending</h6>
+                    <h4 class="text-success fw-bold">₹ @ViewBag.TodayTotal</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Yesterday</h6>
+                    <h4 class="text-primary fw-bold">₹ @ViewBag.YesterdayTotal</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">This Week</h6>
+                    <h4 class="text-warning fw-bold">₹ @ViewBag.ThisWeekTotal</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">This Month</h6>
+                    <h4 class="text-danger fw-bold">₹ @ViewBag.ThisMonthTotal</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- INCOME Summary Section -->
+    <div class="row g-3 mt-3">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Today's Income</h6>
+                    <h4 class="text-success fw-bold">₹ @ViewBag.TodayIncome</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">This Month Income</h6>
+                    <h4 class="text-primary fw-bold">₹ @ViewBag.ThisMonthIncome</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Total Income</h6>
+                    <h4 class="text-warning fw-bold">₹ @ViewBag.TotalIncome</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Total Savings</h6>
+                    <h4 class="text-danger fw-bold">₹ @ViewBag.TotalSavings</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Chart Section (Pie Chart) -->
+    <div class="card shadow-sm border-0 mt-4">
+        <div class="card-body">
+            <h5 class="mb-3 fw-bold">Category Wise Expense Chart</h5>
+            <div class="text-center">
+                <canvas id="expenseChart" style="max-height: 350px;"></canvas>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 mt-4">
+    <div class="card-body">
+        <h5 class="fw-bold">📊 Monthly Expense Chart</h5>
+        <canvas id="monthlyExpenseChart"></canvas>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mt-4">
+    <div class="card-body">
+        <h5 class="fw-bold">💰 Income vs Expense Comparison</h5>
+        <canvas id="incomeExpenseChart"></canvas>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 mt-4 mb-5">
+    <div class="card-body">
+        <h5 class="fw-bold">📈 Savings Growth</h5>
+        <canvas id="savingsChart"></canvas>
+    </div>
+</div>
+
+    </div>
+
+</div>
+
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const categoryData = @Html.Raw(ViewBag.CategoryData);
+
+   const iconMap = {
+    "Food": "🥗",
+    "Cloths": "👗",
+    "Travel": "🚌",
+    "Home": "🏡",
+    "Entertainment": "🎉",
+    "Health": "💊",
+    "Shopping": "🛒",
+    "Bills": "💡"
+};
+
+const labels = categoryData.map(x => iconMap[x.Category] + " " + x.Category);
+
+    const dataValues = categoryData.map(x => x.Amount);
+
+    const colors = [
+        '#ff6384',
+        '#36a2eb',
+        '#ffcd56',
+        '#4bc0c0',
+        '#9966ff',
+        '#ff9f40',
+    ];
+
+    new Chart(document.getElementById('expenseChart'), {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: dataValues,
+                backgroundColor: colors,
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { font: { size: 14 } }
+                }
+            }
+        }
+    });
+
+    // ---------------- MONTHLY EXPENSE CHART ----------------
+    const monthlyData = @Html.Raw(ViewBag.MonthlyExpense);
+    new Chart(document.getElementById('monthlyExpenseChart'), {
+        type: 'bar',
+        data: {
+            labels: monthlyData.map(x => x.Month),
+            datasets: [{
+                label: 'Expenses',
+                data: monthlyData.map(x => x.Total),
+                backgroundColor: '#36a2eb'
+            }]
+        }
+    });
+
+    // ---------------- INCOME VS EXPENSE CHART ----------------
+    const compareData = @Html.Raw(ViewBag.IncomeExpenseCompare);
+    new Chart(document.getElementById('incomeExpenseChart'), {
+        type: 'bar',
+        data: {
+            labels: compareData.map(x => x.Month),
+            datasets: [
+                {
+                    label: 'Income',
+                    data: compareData.map(x => x.Income),
+                    backgroundColor: '#4bc0c0'
+                },
+                {
+                    label: 'Expense',
+                    data: compareData.map(x => x.Expense),
+                    backgroundColor: '#ff6384'
+                }
+            ]
+        }
+    });
+
+    // ---------------- SAVINGS GROWTH LINE ----------------
+    new Chart(document.getElementById('savingsChart'), {
+        type: 'line',
+        data: {
+            labels: compareData.map(x => x.Month),
+            datasets: [{
+                label: "Savings",
+                fill: false,
+                borderColor: "#9966ff",
+                tension: 0.3,
+                data: compareData.map(x => x.Income - x.Expense)
+            }]
+        }
+    });
+</script>

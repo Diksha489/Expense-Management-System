@@ -1,0 +1,59 @@
+@model List<ExpenseTracker.MVC.Models.Expense>
+
+
+<h2 class="page-title">All Expenses</h2>
+
+<div class="d-flex justify-content-center gap-3 mb-4"> 
+<a href="/Expenses/Dashboard" class="btn btn-info text-black px-4"> 
+📊 View Dashboard 
+</a> 
+</div>
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn-add-expense">+ Add New Expense</a>
+</div>
+@functions {
+    string GetCategoryIcon(string category)
+    {
+        return category switch
+        {
+            "Food" => "🥗",
+            "Cloths" => "👗",
+            "Travel" => "🚌",
+            "Home" => "🏡",
+            "Entertainment" => "🎉",
+            "Health" => "💊",
+            "Shopping" => "🛒",
+            "Bills" => "💡",
+            _ => "📌"
+        };
+    }
+}
+<div class="table-modern mt-3">
+    <table class="table table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th style="width: 150px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Amount.ToString("0.00")</td>
+                    <td>@GetCategoryIcon(item.Category) @item.Category</td>
+                    <td>@item.Date.ToString("dd-MM-yyyy")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="action-btn btn-edit">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="action-btn btn-delete ms-1">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

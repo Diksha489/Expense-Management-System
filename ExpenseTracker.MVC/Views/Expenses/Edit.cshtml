@@ -1,0 +1,77 @@
+@model ExpenseTracker.MVC.Models.Expense
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center rounded-4">
+                    <h3 class="m-0 fw-bold">✏️ Edit Expense</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-action="Edit">
+                        <input type="hidden" asp-for="Id" />
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Title</label>
+                            <input asp-for="Title" class="form-control rounded-3" />
+                        </div>
+
+                        <!-- Amount -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Amount</label>
+                            <input asp-for="Amount" class="form-control rounded-3" />
+                        </div>
+
+                        <!-- Category -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Category</label>
+                            
+                            <select asp-for="Category" class="form-select">
+    <option value="Food">🥗 Food</option>
+    <option value="Cloths">👗 Cloths</option>
+    <option value="Travel">🚌 Travel</option>
+    <option value="Home">🏡 Home</option>
+    <option value="Entertainment">🎉 Entertainment</option>
+    <option value="Health">💊 Health</option>
+    <option value="Shopping">🛒 Shopping</option>
+    <option value="Bills">💡 Bills</option>
+</select>
+
+
+                        </div>
+
+                        <!-- Date -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Date</label>
+                            <input asp-for="Date" type="date" class="form-control rounded-3" />
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="/Expenses/Index" class="btn btn-secondary px-4 rounded-3">Back</a>
+                            <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold">Update</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 1rem !important;
+    }
+    .form-control {
+        height: 45px;
+        font-size: 1rem;
+    }
+</style>

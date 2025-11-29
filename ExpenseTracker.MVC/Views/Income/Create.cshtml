@@ -1,0 +1,30 @@
+@model ExpenseTracker.MVC.Models.Income
+
+<h2 class="text-center fw-bold mb-4">Add Income</h2>
+
+<div class="form-wrapper">
+    <div class="form-card">
+
+        <form asp-action="Create">
+
+            <div class="mb-3">
+                <label class="form-label">Source</label>
+                <input asp-for="Source" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Amount</label>
+                <input asp-for="Amount" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input asp-for="Date" class="form-control" type="date" />
+            </div>
+
+            <button type="submit" class="btn btn-success btn-save">Save Income</button>
+
+        </form>
+
+    </div>
+</div>

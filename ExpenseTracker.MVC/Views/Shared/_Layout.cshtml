@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Expense Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+        .navbar-brand span {
+            font-size: 1.25rem;
+        }
+
+        .navbar-custom {
+            background-color: #222;
+            padding-top: 0.6rem;
+            padding-bottom: 0.6rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: #f0f0f0 !important;
+            margin-right: 8px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffffff !important;
+        }
+
+        .btn-nav-signup {
+            padding: 6px 18px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .app-footer {
+            background: #222;
+            padding: 18px 0;
+            color: #eee;
+            text-align: center;
+            border-top: 2px solid #444;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow-sm">
+        
+
+            <div class="container-fluid">
+
+        <a class="navbar-brand d-flex align-items-center ms-9"
+           asp-controller="Home" asp-action="Index">
+            <img src="~/images/logo.png" alt="Logo" class="logo-img me-2" />
+            <span class="fw-bold">Expense Management System</span>
+        </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+                    <ul class="navbar-nav align-items-center">
+
+    <li class="nav-item">
+    <a class="nav-btn" asp-controller="Home" asp-action="Index">
+        Home
+    </a>
+</li>
+
+@if (Context.Session.GetString("LoggedIn") == "true")
+{
+    <li class="nav-item ms-3">
+        <a class="btn btn-danger px-4 py-1 rounded-3 fw-bold" 
+           asp-controller="Auth" asp-action="Logout">
+            Logout
+        </a>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-btn" asp-controller="Auth" asp-action="Login">Login</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-btn" asp-controller="Auth" asp-action="Register">
+            Sign Up
+        </a>
+    </li>
+}
+
+
+</ul>
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="d-flex flex-column min-vh-100">
+        <main role="main" class="flex-fill">
+            @RenderBody()
+        </main>
+
+        <footer class="app-footer mt-auto">
+            <div>All rights reserved © 2025 <b>Diksha Pal</b>.</div>
+            <div class="footer-links mt-2">
+                <a href="#">About</a> |
+                <a href="#">Contact</a> |
+                <a href="#">Privacy Policy</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

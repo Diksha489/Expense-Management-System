@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Create Account";
+}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+
+        <h2 class="auth-title">Create Your Account ✨</h2>
+
+        <form asp-action="Register">
+
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input class="form-control" type="text" name="Name" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input class="form-control" type="email" name="Email" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input class="form-control" type="password" name="Password" required />
+            </div>
+
+            <button type="submit" class="btn btn-success btn-auth">Register</button>
+
+            <p class="text-center mt-3">
+                Already have an account?
+                <a asp-action="Login" class="text-primary fw-bold">Login</a>
+            </p>
+
+        </form>
+
+    </div>
+</div>

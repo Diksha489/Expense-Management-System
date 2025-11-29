@@ -1,0 +1,210 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+.auth-wrapper {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    width: 420px;
+    padding: 32px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+
+.auth-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #222;
+    text-align: center;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+.nav-custom-link {
+    color: #f0f0f0 !important;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+.nav-custom-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff !important;
+}
+
+.btn-nav-signup {
+    background: #0066ff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px !important;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.btn-nav-signup:hover {
+    background: #0053d6;
+    transform: translateY(-1px);
+}
+.nav-btn {
+    background: #0066ff;
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+    margin-left: 10px;
+}
+
+.nav-btn:hover {
+    background: #0053d6;
+    transform: translateY(-1px);
+    color: #fff !important;
+}
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.form-card {
+    width: 650px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.form-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+}
+
+.btn-save {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.action-btn {
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+}
+
+.btn-delete:hover {
+    background-color: #b52a37;
+}
+
+.btn-add-expense {
+    background-color: #0d6efd;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.btn-add-expense:hover {
+    background-color: #0056d2;
+    color: #fff;
+}
+
+.btn-dashboard {
+    background-color: #00c4ff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: #000;
+    font-weight: 600;
+}
+
+.btn-dashboard:hover {
+    background-color: #00a8db;
+}
+
+.table-modern {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+
